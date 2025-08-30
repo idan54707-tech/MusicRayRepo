@@ -1,0 +1,36 @@
+# Dockerfile for RunPod Serverless - musicRay
+FROM runpod/pytorch:2.1.0-py3.10-cuda12.1.1-devel-ubuntu22.04
+
+# הגדרת משתני סביבה
+ENV PYTHONUNBUFFERED=1
+ENV DEBIAN_FRONTEND=noninteractive
+
+# התקנת חבילות מערכת
+RUN apt-get update && apt-get install -y \
+    ffmpeg \
+    wget \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# יצירת תיקיית עבודה
+WORKDIR /app
+
+# העתקת requirements
+COPY requirements-serverless.txt requirements.txt
+
+# התקנת תלויות Python
+RUN pip install --upgrade pip setuptools wheel
+RUN pip install --no-cache-dir -r requirements.txt
+
+# הורדה מוקדמת של מודל Demucs (חיוני לServerless)
+RUN python -c "from demucs.api import Separator; Separator(model='htdemucs', device='cpu')" || echo "מודל יורד בהרצה הראשונה"
+
+# העתקת קוד האפליקציה
+COPY handler.py .
+
+# בדיקת תקינות
+RUN python -c "import torch; import demucs; import librosa; import runpod; print('✅ כל הספריות מותקנות')"
+
+# הרצת Handler
+CMD ["python", "handler.py"]

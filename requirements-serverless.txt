@@ -1,0 +1,7 @@
+# RunPod Serverless Requirements for musicRay - Ultra Minimal
+runpod>=1.6.0
+torch>=2.0.0
+torchaudio>=2.0.0
+demucs>=4.0.0
+soundfile>=0.12.0
+requests>=2.28.0
