@@ -1,0 +1,73 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+
+# Storage & temp files
+storage/
+*.wav
+*.mp3
+*.flac
+*.m4a
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Docker
+.dockerignore
+
+# AI Models (downloaded by Demucs)
+models/
+.cache/
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+*.tgz
+*.tar.gz
